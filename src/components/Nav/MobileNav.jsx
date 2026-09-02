@@ -72,7 +72,7 @@ const MobileNav = () => {
         <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
         </svg>
-        <span className="text-[0.72rem] font-semibold uppercase tracking-[0.08em]">Menu</span>
+        <span className="text-[0.72rem] font-semibold uppercase tracking-[0.08em]">菜单</span>
       </button>
 
       {/* ── Sheet + Backdrop ────────────────────────────────── */}
@@ -126,11 +126,11 @@ const MobileNav = () => {
                 {/* Settings */}
                 <section>
                   <p className="text-[0.6rem] font-semibold uppercase tracking-[0.18em] text-gray-400 dark:text-gray-600 pb-2 mb-2 border-b border-indigo-500/10 dark:border-indigo-400/10">
-                    Settings
+                    设置
                   </p>
                   <div className="flex flex-col gap-3">
                     <div>
-                      <p className="section-label mb-2">Participants</p>
+                      <p className="section-label mb-2">参与者</p>
                       <List
                         value={namesList}
                         onChange={(e) => setNamesList(e)}
@@ -139,29 +139,29 @@ const MobileNav = () => {
                     </div>
                     <div className="border-t border-gray-100 dark:border-gray-800/50" />
                     <div>
-                      <p className="section-label">Customization</p>
+                      <p className="section-label">自定义</p>
                       <WinnerMessage />
                     </div>
                     <div className="border-t border-gray-100 dark:border-gray-800/50" />
                     <div>
-                      <p className="section-label mb-2">Behavior</p>
+                      <p className="section-label mb-2">行为</p>
                       <div className="flex flex-col gap-2.5">
                       <Toggle
                         isOn={shouldRemoveName}
                         handleToggle={() => setShouldRemoveName(!shouldRemoveName)}
-                        label="Remove after chosen"
+                        label="抽中后移除"
                         hiddenMobile={false}
                       />
                       <Toggle
                         isOn={isWinnerPromptEnabled}
                         handleToggle={() => setIsWinnerPromptEnabled(!isWinnerPromptEnabled)}
-                        label="Show winner prompt"
+                        label="显示中奖提示"
                         hiddenMobile={false}
                       />
                       <Toggle
                         isOn={isConfettiEnabled}
                         handleToggle={() => setIsConfettiEnabled(!isConfettiEnabled)}
-                        label="Show confetti"
+                        label="显示彩带特效"
                         hiddenMobile={false}
                       />
                       </div>
@@ -179,29 +179,22 @@ const MobileNav = () => {
                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                   </svg>
-                  Home
+                  首页
                 </Link>
 
                 <Link to="/features" onClick={close} className={bottomBarItemClass}>
                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
                   </svg>
-                  Features
+                  功能特性
                 </Link>
 
                 <button onClick={close} className={bottomBarItemClass}>
                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                   </svg>
-                  Close
+                  关闭
                 </button>
-
-                <Link to="/help" onClick={close} className={bottomBarItemClass}>
-                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  FAQs
-                </Link>
 
                 <div className={bottomBarItemClass}>
                   <DarkModeSwitch
@@ -211,7 +204,7 @@ const MobileNav = () => {
                     moonColor="#818cf8"
                     sunColor="#f59e0b"
                   />
-                  {isDarkMode ? 'Dark' : 'Light'}
+                  {isDarkMode ? '深色' : '浅色'}
                 </div>
               </div>
             </motion.div>

@@ -3,36 +3,36 @@ import { Link } from 'react-router-dom';
 
 const sections = [
   {
-    title: 'What Are Cookies?',
-    content: `Cookies are small text files placed on your device by a website. They are widely used to make websites work more efficiently and to provide information to site operators. Cookies are distinct from browser localStorage, which is also described below.`,
+    title: '什么是 Cookie？',
+    content: `Cookie 是网站放置在您设备上的小型文本文件。它们被广泛用于让网站更高效地运行，并向站点运营者提供信息。Cookie 与浏览器 localStorage 不同，后者也将在下文说明。`,
   },
   {
-    title: 'Does Picksy Use Cookies?',
-    content: `Picksy itself does not set any first-party cookies. The application does not use cookies for authentication, tracking, advertising, or any other purpose.`,
+    title: 'Picksy 使用 Cookie 吗？',
+    content: `Picksy 本身不会设置任何第一方 Cookie。该应用不会将 Cookie 用于身份验证、追踪、广告或任何其他目的。`,
   },
   {
-    title: 'localStorage (Not Cookies)',
-    content: `Picksy uses your browser's localStorage — not cookies — to persist your settings between visits. The following values are saved locally on your device:\n\n• Participants list (names you have entered)\n• Winner message\n• "Remove after chosen" toggle state\n• Light / dark mode preference\n\nLocalStorage data is stored only on your device and is never transmitted to any server. You can remove it at any time by clearing your browser's site data for this page.`,
+    title: 'localStorage（并非 Cookie）',
+    content: `Picksy 使用您浏览器的 localStorage（而非 Cookie）来在多次访问之间保存您的设置。以下内容会保存在您的设备本地：\n\n• 参与者列表（您输入的名字）\n• 中奖提示语\n• 「抽中后移除」开关状态\n• 浅色 / 深色模式偏好\n\nlocalStorage 数据仅存储在您的设备上，绝不会传输到任何服务器。您随时可以通过清除浏览器中本页面的站点数据来删除它。`,
   },
   {
-    title: 'Third-Party Cookies — Vercel Analytics',
-    content: `Picksy is deployed on Vercel and uses Vercel Analytics to understand general usage patterns. Vercel Analytics is designed to be privacy-friendly and does not rely on cookies to track users. It collects anonymised, aggregated data such as page view counts and broad geographic regions.\n\nThis data is accessed exclusively by the developer and is used solely to improve site features and user experience. It is never shared with third parties, sold, or used for marketing or advertising purposes. For full details on how Vercel handles data, refer to Vercel's Privacy Policy at vercel.com/legal/privacy-policy.`,
+    title: '第三方 Cookie —— Vercel Analytics',
+    content: `Picksy 部署在 Vercel 上，并使用 Vercel Analytics 来了解总体使用情况。Vercel Analytics 以隐私友好为设计目标，不依赖 Cookie 来追踪用户。它收集匿名、聚合的数据，例如页面浏览量和大致的地理区域。\n\n这些数据仅由开发者访问，仅用于改进站点功能和用户体验。数据绝不会与第三方共享、出售，也不会用于营销或广告目的。有关 Vercel 如何处理数据的完整详情，请参阅 vercel.com/legal/privacy-policy 上的 Vercel 隐私政策。`,
   },
   {
-    title: 'No Advertising or Profiling Cookies',
-    content: `Picksy does not use advertising networks, remarketing services, or any tools that build individual user profiles. No third-party scripts other than Vercel Analytics are loaded.`,
+    title: '不含广告或用户画像 Cookie',
+    content: `Picksy 不使用广告网络、再营销服务或任何会构建个人用户画像的工具。除 Vercel Analytics 外，不会加载任何第三方脚本。`,
   },
   {
-    title: 'Managing Cookies and Site Data',
-    content: `You can control and delete cookies and localStorage data through your browser settings. The steps vary by browser:\n\n• Chrome: Settings → Privacy and security → Clear browsing data\n• Firefox: Settings → Privacy & Security → Cookies and Site Data → Clear Data\n• Safari: Settings → Privacy → Manage Website Data\n\nNote that clearing site data for Picksy will remove your saved names list and preferences.`,
+    title: '管理 Cookie 和站点数据',
+    content: `您可以通过浏览器设置来控制和删除 Cookie 与 localStorage 数据。各浏览器的步骤有所不同：\n\n• Chrome：设置 → 隐私与安全 → 清除浏览数据\n• Firefox：设置 → 隐私与安全 → Cookie 和站点数据 → 清除数据\n• Safari：设置 → 隐私 → 管理网站数据\n\n请注意，清除 Picksy 的站点数据会一并删除您保存的名字列表和偏好设置。`,
   },
   {
-    title: 'Changes to This Policy',
-    content: `This Cookies Policy may be updated from time to time. The effective date at the top of the page will reflect the most recent revision. Continued use of Picksy after changes are posted constitutes acceptance of the updated policy.`,
+    title: '本政策的变更',
+    content: `本 Cookie 政策可能会不时更新。页面顶部的生效日期将反映最新修订。在变更发布后继续使用 Picksy，即表示您接受更新后的政策。`,
   },
   {
-    title: 'Contact',
-    content: `If you have questions about cookies or data storage in Picksy, please contact the developer at sudojoie@proton.me.`,
+    title: '联系我们',
+    content: `如果您对 Picksy 中的 Cookie 或数据存储有任何疑问，请通过 sudojoie@proton.me 联系开发者。`,
   },
 ];
 
@@ -40,12 +40,12 @@ const Cookies = () => {
   return (
     <div className='w-full max-w-2xl py-12 px-6'>
       <div className='mb-10'>
-        <p className='text-xs uppercase tracking-widest font-semibold text-indigo-500 dark:text-indigo-400 mb-2'>Legal</p>
-        <h1 className='text-3xl font-bold tracking-tight text-gray-900 dark:text-white'>Cookies Policy</h1>
+        <p className='text-xs uppercase tracking-widest font-semibold text-indigo-500 dark:text-indigo-400 mb-2'>法律</p>
+        <h1 className='text-3xl font-bold tracking-tight text-gray-900 dark:text-white'>Cookie 政策</h1>
         <p className='mt-2 text-sm text-gray-500 dark:text-gray-400'>
-          How Picksy handles cookies and local browser storage.
+          Picksy 如何处理 Cookie 和本地浏览器存储。
         </p>
-        <p className='mt-1 text-xs text-gray-400 dark:text-gray-600'>Effective: April 21, 2026</p>
+        <p className='mt-1 text-xs text-gray-400 dark:text-gray-600'>生效日期：2026 年 4 月 21 日</p>
       </div>
 
       <div className='flex flex-col gap-6'>
@@ -65,9 +65,9 @@ const Cookies = () => {
       </div>
 
       <div className='mt-10 flex flex-wrap gap-4 text-xs text-gray-400 dark:text-gray-600'>
-        <Link to='/privacy' className='hover:text-indigo-500 dark:hover:text-indigo-400 transition-colors'>Privacy Policy</Link>
+        <Link to='/privacy' className='hover:text-indigo-500 dark:hover:text-indigo-400 transition-colors'>隐私政策</Link>
         <span>&middot;</span>
-        <Link to='/terms' className='hover:text-indigo-500 dark:hover:text-indigo-400 transition-colors'>Terms &amp; Conditions</Link>
+        <Link to='/terms' className='hover:text-indigo-500 dark:hover:text-indigo-400 transition-colors'>服务条款</Link>
       </div>
     </div>
   );

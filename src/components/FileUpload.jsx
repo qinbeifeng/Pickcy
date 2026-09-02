@@ -13,7 +13,7 @@ const FileUpload = (props) => {
         };
         reader.readAsText(file);
       } else {
-        alert("Only plain text (.txt) and comma-separated-value (.csv) files are allowed.");
+        alert("仅支持纯文本文件（.txt）和逗号分隔值文件（.csv）。");
       }
     }
   };
@@ -41,7 +41,7 @@ const FileUpload = (props) => {
       </label>
       <p className='mt-1.5 text-xs text-gray-400 dark:text-gray-500'>
         .txt or .csv {' '}
-        <Link to='/help' className='link'>Learn more</Link>
+        <Link to='/help' className='link'>了解更多</Link>
       </p>
     </div>
   );

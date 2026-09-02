@@ -1,98 +1,59 @@
 # Picksy
 
-Picksy is an open-source web app that picks a random name from a list — fairly and instantly.
+## 功能特性
 
-[![Visit - webapp](https://img.shields.io/badge/Visit-webapp-2ea44f?style=for-the-badge&logo=vercel)](https://picksy.sudojoie.com)
-[![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react)](https://react.dev)
-[![TailwindCSS](https://img.shields.io/badge/TailwindCSS-4-38BDF8?style=for-the-badge&logo=tailwindcss)](https://tailwindcss.com)
+- **两种抽取模式** —— 经典列表抽取或动画转盘，一个开关即可切换
+- **随机点名** —— 从你的名单中即时抽取一个名字，并伴随彩带庆祝
+- **参与者列表** —— 手动添加名字（每行一个），或上传 `.txt` / `.csv` 文件
+- **中奖提示** —— 自定义抽取名字时显示的消息
+- **抽中后移除** —— 名字被抽中后可选择将其从池中移除
+- **全屏 + 缩放** —— 演示时可进入全屏，并在 50%–150% 之间缩放
+- **浅色 / 深色模式** —— 桌面端在导航栏切换，移动端在底部栏切换
+- **动画底部栏** —— 移动优先的导航，支持下拉手势关闭的抽屉和流畅的 framer-motion 过渡
+- **完全客户端运行** —— 任何数据都不会发送到服务器，一切都在浏览器中运行
+- **状态持久化** —— 主题、名字列表、中奖提示、抽取模式和行为设置都通过 Jotai 保存到 `localStorage`
 
----
+## 技术栈
 
-## Features
+| 库                    | 版本 | 用途                           |
+| --------------------- | ---- | ------------------------------ |
+| React                 | 19   | UI 框架                        |
+| Vite                  | 8    | 构建工具和开发服务器           |
+| Tailwind CSS          | 4    | 样式                           |
+| Jotai                 | 2    | 状态管理 + localStorage 持久化 |
+| Framer Motion         | 12   | 动画底部栏和过渡               |
+| React Router DOM      | 7    | 客户端路由                     |
+| Headless UI           | 2    | 无障碍模态框 / 对话框          |
+| Heroicons             | 2    | 图标集                         |
+| react-canvas-confetti | 2    | 中奖彩带动画                   |
+| Vercel Analytics      | 2    | 使用情况分析                   |
 
-- **Two picking modes** — classic list draw or an animated spin wheel, switchable with a single toggle
-- **Random name picker** — instantly draws a name from your list with a confetti celebration
-- **Participants list** — add names manually (one per line) or upload a `.txt` / `.csv` file
-- **Winner prompt** — customise the message shown when a name is drawn
-- **Remove after chosen** — optionally remove a name from the pool after it's picked
-- **Fullscreen + zoom** — go fullscreen for presentations and zoom between 50 %–150 %
-- **Light / dark mode** — toggle from the nav on desktop, or the bottom dock on mobile
-- **Animated bottom dock** — mobile-first navigation with a drag-to-dismiss drawer and smooth framer-motion transitions
-- **Fully client-side** — no data is ever sent to a server; everything runs in the browser
-- **State persistence** — theme, names list, winner message, picking mode, and behavior settings are all saved to `localStorage` via Jotai
+## 快速开始
 
-## Tech Stack
-
-| Library | Version | Purpose |
-|---|---|---|
-| React | 19 | UI framework |
-| Vite | 8 | Build tool and dev server |
-| Tailwind CSS | 4 | Styling |
-| Jotai | 2 | State management + localStorage persistence |
-| Framer Motion | 12 | Animated bottom dock and transitions |
-| React Router DOM | 7 | Client-side routing |
-| Headless UI | 2 | Accessible modal / dialog |
-| Heroicons | 2 | Icon set |
-| react-canvas-confetti | 2 | Winner confetti animation |
-| Vercel Analytics | 2 | Usage analytics |
-
-## Getting Started
-
-### Run locally
+### 本地运行
 
 ```shell
-# 1. Clone the repo
+# 1. 克隆仓库
 git clone https://github.com/joiellantero/picksy.git
 cd picksy
 
-# 2. Install dependencies
+# 2. 安装依赖
 npm install
 
-# 3. Start the dev server
+# 3. 启动开发服务器
 npm run dev
 ```
 
-The app will be available at `http://localhost:5173`.
+应用将在 `http://localhost:5173` 上可用。
 
-### Build for production
+### 构建生产版本
 
 ```shell
 npm run build
 ```
 
-### Preview the production build
+### 预览生产构建
 
 ```shell
 npm run preview
 ```
-
-### Deploy
-
-Works out of the box with [Vercel](https://vercel.com), [Netlify](https://netlify.com), or any static hosting provider -- just point it at the `dist/` folder.
-
-## Customization
-
-Theme colors are defined in `tailwind.config.js`. Update the values there to retheme the app.
-
-## File Upload Notes
-
-The file input accepts `.txt` and `.csv` files. Due to a [Chromium bug on macOS](https://bugs.chromium.org/p/chromium/issues/detail?id=646941), some text-like files (`.py`, `.js`, etc.) may pass the browser's `accept` filter. This is handled defensively in `FileUpload.jsx` by re-validating the file extension before reading it.
-
-## Contributors
-
-All contributions are welcome! Feel free to open issues or pull requests.
-
-## Support
-
-[![Sponsor on GitHub](https://img.shields.io/badge/Sponsor-♥-ea4aaa?style=for-the-badge&logo=github)](https://github.com/sponsors/joiellantero)
-[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/joiel)
-
-## License
-
-This project is licensed under the **[PolyForm Noncommercial License 1.0.0](https://polyformproject.org/licenses/noncommercial/1.0.0/)**.
-
-**In Summary:**
-- ✅ Free to use, study, and modify for personal or open-source projects
-- ✅ Free to share and redistribute non-commercially
-- ❌ Cannot be used for commercial purposes
-- ❌ Cannot be used in any way that generates revenue or monetary compensation

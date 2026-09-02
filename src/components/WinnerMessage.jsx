@@ -9,8 +9,8 @@ const WinnerMessage = () => {
     <form>
       <TextField
         id='winnerMessage'
-        label='Winner Prompt'
-        placeholder='e.g. 🎉 And the winner is...'
+        label='中奖提示语'
+        placeholder='例如：🎉 恭喜，中奖者是...'
         value={winnerMessage}
         onChange={(e) => setWinnerMessage(e)}
         onClear={() => setWinnerMessage([])}

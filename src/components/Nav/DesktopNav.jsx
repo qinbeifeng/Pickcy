@@ -18,31 +18,17 @@ const DesktopNav = () => {
     <>
       <nav className="items-center justify-center gap-1 hidden md:flex">
         <Link to="/" className={navLinkClass('/')}>
-          Home
+          首页
           {pathname === '/' && (
             <span className="absolute bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-indigo-500" />
           )}
         </Link>
         <Link to="/features" className={navLinkClass('/features')}>
-          Features
+          功能特性
           {pathname === '/features' && (
             <span className="absolute bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-indigo-500" />
           )}
         </Link>
-        <Link to="/help" className={navLinkClass('/help')}>
-          FAQs
-          {pathname === '/help' && (
-            <span className="absolute bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-indigo-500" />
-          )}
-        </Link>
-        <a
-          href="https://github.com/joiellantero/picksy"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="px-3 py-2 rounded-lg text-sm font-medium transition-colors duration-150 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800/60"
-        >
-          Documentation
-        </a>
       </nav>
       <div className='hidden md:flex items-center gap-3'>
         <DarkModeSwitch

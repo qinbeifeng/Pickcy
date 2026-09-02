@@ -89,8 +89,8 @@ const Modal = (props) => {
               </p>
 
               <p className={`text-xs text-gray-300 dark:text-gray-600 tracking-wide transition-all duration-300 overflow-hidden ${hovered || idle ? 'opacity-100 max-h-8 mt-8' : 'opacity-0 max-h-0 mt-0'}`}>
-                <span className="hidden md:inline">Click here to close</span>
-                <span className="md:hidden">Tap here to close</span>
+                <span className="hidden md:inline">点击此处关闭</span>
+                <span className="md:hidden">轻触此处关闭</span>
               </p>
 
               <button className="h-0 w-0 overflow-hidden" />

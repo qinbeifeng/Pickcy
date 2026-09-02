@@ -11,7 +11,7 @@ const List = (props) => {
         id={'listInput'}
         onChange={(e) => props.onChange(e.target.value)}
         onClear={props.onClear}
-        placeholder={'One name per line...'}
+        placeholder={'每行一个名字...'}
       />
       <FileUpload
         id={'namesListFile'}

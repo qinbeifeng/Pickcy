@@ -30,12 +30,12 @@ const Home = () => {
               <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M15 12a3 3 0 11-6 0 3 3 0 016 0z' />
             </svg>
           </div>
-          <h2 className='text-sm font-semibold text-gray-900 dark:text-white'>Settings</h2>
+          <h2 className='text-sm font-semibold text-gray-900 dark:text-white'>设置</h2>
         </div>
 
         {/* Participants */}
         <section className='flex flex-col gap-1.5'>
-          <p className='section-label'>Participants</p>
+          <p className='section-label'>参与者</p>
           <List
             value={namesList}
             onChange={(e) => setNamesList(e)}
@@ -47,7 +47,7 @@ const Home = () => {
 
         {/* Customization */}
         <section className='flex flex-col gap-1.5'>
-          <p className='section-label'>Customization</p>
+          <p className='section-label'>自定义</p>
           <WinnerMessage />
         </section>
 
@@ -55,23 +55,23 @@ const Home = () => {
 
         {/* Behavior */}
         <section className='flex flex-col gap-2.5'>
-          <p className='section-label'>Behavior</p>
+          <p className='section-label'>行为</p>
           <Toggle
             isOn={shouldRemoveName}
             handleToggle={() => setShouldRemoveName(!shouldRemoveName)}
-            label='Remove after chosen'
+            label='抽中后移除'
             hiddenMobile={false}
           />
           <Toggle
             isOn={isWinnerPromptEnabled}
             handleToggle={() => setIsWinnerPromptEnabled(!isWinnerPromptEnabled)}
-            label='Show winner prompt'
+            label='显示中奖提示'
             hiddenMobile={false}
           />
           <Toggle
             isOn={isConfettiEnabled}
             handleToggle={() => setIsConfettiEnabled(!isConfettiEnabled)}
-            label='Show confetti'
+            label='显示彩带特效'
             hiddenMobile={false}
           />
         </section>

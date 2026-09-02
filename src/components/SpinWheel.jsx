@@ -23,8 +23,11 @@ export default function SpinWheel({ removeName }) {
   const canvasRef = useRef(null);
   const rotationRef = useRef(0);
   const animRef = useRef(null);
+  const speedRef = useRef(0);
+  const modeRef = useRef('idle'); // 'idle' | 'spinning' | 'decelerating'
 
   const [spinning, setSpinning] = useState(false);
+  const [decelerating, setDecelerating] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [drawnName, setDrawnName] = useState('');
 
@@ -42,7 +45,7 @@ export default function SpinWheel({ removeName }) {
   const isEmpty = names.length === 0;
 
   const winnerPrompt = isWinnerPromptEnabled
-    ? (winnerMessage && winnerMessage.length > 0 ? winnerMessage : '🎉 And the winner is...')
+    ? (winnerMessage && winnerMessage.length > 0 ? winnerMessage : '🎉 恭喜，中奖者是...')
     : '';
 
   const drawWheel = useCallback((rot, dark = isDarkMode) => {
@@ -91,12 +94,12 @@ export default function SpinWheel({ removeName }) {
       ctx.font = `600 ${16 * DPR}px system-ui,-apple-system,sans-serif`;
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
-      ctx.fillText('No participants yet', cx, cy + 24 * DPR);
+      ctx.fillText('还没有参与者', cx, cy + 24 * DPR);
 
       // Hint: text-gray-400 dark:text-gray-500
       ctx.fillStyle = dark ? '#6b7280' : '#9ca3af';
       ctx.font = `${14 * DPR}px system-ui,-apple-system,sans-serif`;
-      ctx.fillText('Open settings to add names', cx, cy + 46 * DPR);
+      ctx.fillText('打开设置添加名字', cx, cy + 46 * DPR);
       return;
     }
 
@@ -161,49 +164,69 @@ export default function SpinWheel({ removeName }) {
 
   const { getInstance, fire } = useConfetti();
 
-  const spin = useCallback(() => {
-    if (spinning || names.length === 0) return;
+  /* 结算：根据当前旋转角度确定指针所指向的扇形 */
+  const finishSpin = useCallback(() => {
+    if (animRef.current) {
+      cancelAnimationFrame(animRef.current);
+      animRef.current = null;
+    }
+    modeRef.current = 'idle';
+    speedRef.current = 0;
+    setSpinning(false);
+    setDecelerating(false);
 
     const n = names.length;
-    const winnerIdx = Math.floor(Math.random() * n);
     const seg = (2 * Math.PI) / n;
-    const r0 = rotationRef.current;
-    const minSpins = 5 + Math.random() * 3;
+    const rot = rotationRef.current;
+    // 指针在顶部（-π/2），扇形 i 中心对齐指针时满足 rot ≡ -(i + 0.5) * seg (mod 2π)
+    let winnerIdx = Math.round((-rot / seg) - 0.5);
+    winnerIdx = ((winnerIdx % n) + n) % n;
 
-    // Target: r_final ≡ -(winnerIdx + 0.5) * seg (mod 2π)
-    // so that the winner segment center aligns with the top pointer (−π/2 offset)
-    const idealBase = -(winnerIdx + 0.5) * seg;
-    const k = Math.ceil((r0 + minSpins * 2 * Math.PI - idealBase) / (2 * Math.PI));
-    const r_final = idealBase + k * 2 * Math.PI;
+    if (removeName) {
+      setNamesList(names.filter((_, i) => i !== winnerIdx).join('\n'));
+    }
+    setDrawnName(names[winnerIdx]);
+    setIsOpen(true);
+    if (isConfettiEnabled) fire();
+  }, [names, removeName, setNamesList, isConfettiEnabled, fire]);
 
+  /* 开始旋转：持续加速到目标转速，等待用户手动暂停 */
+  const startSpin = useCallback(() => {
+    if (modeRef.current !== 'idle' || names.length === 0) return;
+    modeRef.current = 'spinning';
     setSpinning(true);
-    const duration = 4000 + Math.random() * 1500;
-    const start = performance.now();
+    setDecelerating(false);
 
-    const animate = (now) => {
-      const t = Math.min((now - start) / duration, 1);
-      const eased = 1 - Math.pow(1 - t, 4); // ease-out quart
-      const rot = r0 + (r_final - r0) * eased;
-      rotationRef.current = rot;
-      drawWheel(rot);
+    let last = performance.now();
+    const loop = (now) => {
+      const dt = Math.min((now - last) / 1000, 0.1); // 秒，防止切后台后跳帧
+      last = now;
 
-      if (t < 1) {
-        animRef.current = requestAnimationFrame(animate);
-      } else {
-        rotationRef.current = r_final;
-        drawWheel(r_final);
-        if (removeName) {
-          setNamesList(names.filter((_, i) => i !== winnerIdx).join('\n'));
+      if (modeRef.current === 'spinning') {
+        const target = 8; // 目标转速 rad/s
+        speedRef.current = Math.min(speedRef.current + dt * 24, target);
+      } else if (modeRef.current === 'decelerating') {
+        speedRef.current *= Math.pow(0.05, dt); // 指数减速，像轮盘一样逐渐慢下来
+        if (speedRef.current < 0.02) {
+          finishSpin();
+          return;
         }
-        setDrawnName(names[winnerIdx]);
-        setSpinning(false);
-        setIsOpen(true);
-        if (isConfettiEnabled) fire();
       }
-    };
 
-    animRef.current = requestAnimationFrame(animate);
-  }, [spinning, names, drawWheel, fire, removeName, setNamesList]);
+      rotationRef.current += speedRef.current * dt;
+      drawWheel(rotationRef.current);
+      animRef.current = requestAnimationFrame(loop);
+    };
+    animRef.current = requestAnimationFrame(loop);
+  }, [names, drawWheel, finishSpin]);
+
+  /* 暂停：触发减速定格 */
+  const requestStop = useCallback(() => {
+    if (modeRef.current === 'spinning') {
+      modeRef.current = 'decelerating';
+      setDecelerating(true);
+    }
+  }, []);
 
   return (
     <>
@@ -233,11 +256,10 @@ export default function SpinWheel({ removeName }) {
         {/* Clickable center hub overlay — tap to spin */}
         {!isEmpty && (
         <button
-          onClick={spin}
-          disabled={spinning}
+          onClick={!spinning ? startSpin : requestStop}
           className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full flex items-center justify-center transition-all duration-200 ${
-            spinning
-              ? 'cursor-not-allowed opacity-60'
+            decelerating
+              ? 'cursor-not-allowed opacity-80'
               : 'cursor-pointer hover:scale-110 active:scale-95'
           }`}
           style={{
@@ -247,7 +269,7 @@ export default function SpinWheel({ removeName }) {
             boxShadow: '0 2px 12px rgba(99,102,241,0.4)',
             border: '2px solid rgba(255,255,255,0.9)',
           }}
-          title='Spin!'
+          title={spinning ? (decelerating ? '减速中…' : '点击暂停') : '开始旋转！'}
         >
           {spinning ? (
             <svg className='w-5 h-5 sm:w-4 sm:h-4 animate-spin text-white' fill='none' viewBox='0 0 24 24'>
@@ -267,7 +289,7 @@ export default function SpinWheel({ removeName }) {
       <div className='relative w-full h-0'>
         {!isEmpty && !spinning && (
           <p className='absolute left-0 right-0 top-1 text-xs text-gray-400 dark:text-gray-500 text-center animate-pulse'>
-            Tap the center to spin
+            点击中心开始旋转，再次点击暂停
           </p>
         )}
       </div>
