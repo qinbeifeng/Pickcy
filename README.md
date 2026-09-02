@@ -34,7 +34,7 @@
 
 ```shell
 # 1. 克隆仓库
-git clone https://github.com/joiellantero/picksy.git
+git clone https://github.com/qinbeifeng/picksy.git
 cd picksy
 
 # 2. 安装依赖
